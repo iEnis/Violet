@@ -1,0 +1,172 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "dbData",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "titles": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "entries": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/$defs/Entry"
+                }
+            },
+            "subseries": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/$defs/Subseries"
+                }
+            }
+        },
+        "required": ["titles", "entries"],
+        "additionalProperties": false
+    },
+    "$defs": {
+        "General": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": ["integer", "string", "null"]
+                },
+                "url": {
+                    "type": ["array", "null"],
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "description": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string",
+                    "enum": ["watched", "watching", "unwatched"]
+                },
+                "title": {
+                    "type": "string"
+                },
+                "release": {
+                    "type": ["number", "null"]
+                }
+            },
+            "required": ["id", "url", "description", "status", "title", "release"]
+        },
+        "Season": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": ["integer", "string", "null"]
+                },
+                "url": {
+                    "type": ["array", "null"],
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "description": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string",
+                    "enum": ["watched", "watching", "unwatched"]
+                },
+                "title": {
+                    "type": "string"
+                },
+                "release": {
+                    "type": ["number", "null"]
+                },
+                "type": {
+                    "const": "season"
+                },
+                "episodes": {
+                    "type": ["number", "null"]
+                }
+            },
+            "required": ["id", "url", "description", "status", "title", "release", "type", "episodes"],
+            "additionalProperties": false
+        },
+        "Movie": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": ["integer", "string", "null"]
+                },
+                "url": {
+                    "type": ["array", "null"],
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "description": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string",
+                    "enum": ["watched", "watching", "unwatched"]
+                },
+                "title": {
+                    "type": "string"
+                },
+                "release": {
+                    "type": ["number", "null"]
+                },
+                "type": {
+                    "const": "movie"
+                }
+            },
+            "required": ["id", "url", "description", "status", "title", "release", "type"],
+            "additionalProperties": false
+        },
+        "Insert": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "isInsert": {
+                    "const": true
+                }
+            },
+            "required": ["title", "isInsert"],
+            "additionalProperties": false
+        },
+        "Entry": {
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/Season"
+                },
+                {
+                    "$ref": "#/$defs/Movie"
+                },
+                {
+                    "$ref": "#/$defs/Insert"
+                }
+            ]
+        },
+        "Subseries": {
+            "type": "object",
+            "properties": {
+                "titles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "entires": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/Entry"
+                    }
+                }
+            },
+            "required": ["titles", "entires"],
+            "additionalProperties": false
+        }
+    }
+}

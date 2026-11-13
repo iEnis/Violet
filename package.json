@@ -1,0 +1,37 @@
+{
+    "name": "electrobun-react-tailwind-vite",
+    "version": "1.0.0",
+    "description": "Electrobun app with React, Tailwind CSS, and Vite HMR",
+    "scripts": {
+        "dev": "hutch run dev:hmr",
+        "dev:nohmr": "hutch run dev",
+        "build:dev": "hutch run build:canary",
+        "gen": "bun run ./gen.ts"
+    },
+    "dependencies": {
+        "@tanstack/react-query": "^5.105.1",
+        "@tanstack/react-router": "^1.170.46",
+        "electrobun": "^2.0.5",
+        "react": "^19.3.1",
+        "react-dom": "^19.3.1"
+    },
+    "devDependencies": {
+        "@rolldown/plugin-babel": "^0.3.0",
+        "@tailwindcss/vite": "^4.3.3",
+        "@tanstack/react-query-devtools": "^5.105.1",
+        "@tanstack/react-router-devtools": "^1.167.2",
+        "@tanstack/router-plugin": "^1.168.48",
+        "@types/babel__core": "^7.20.5",
+        "@types/bun": "latest",
+        "@types/node": "^26.6.6",
+        "@types/react": "^19.3.0",
+        "@types/react-dom": "^19.3.0",
+        "@vitejs/plugin-react": "^6.2.1",
+        "babel-plugin-react-compiler": "^1.0.0",
+        "concurrently": "^9.2.5",
+        "oxlint": "^1.90.0",
+        "tailwindcss": "^4.3.3",
+        "typescript": "^7.0.2",
+        "vite": "^8.3.5"
+    }
+}

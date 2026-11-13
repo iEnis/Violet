@@ -1,0 +1,22 @@
+{
+    "json.schemas": [
+        {
+            //! AnimeTracker
+            "fileMatch": ["**/db.json"],
+            "url": "./src/bun/animeTracker/db.schema.json"
+        }
+    ],
+
+    "files.readonlyInclude": {
+        "**/files.json": true,
+        "**/*.gen.ts": true
+    },
+    "files.watcherExclude": {
+        "**/files.json": true,
+        "**/*.gen.ts": true
+    },
+    "search.exclude": {
+        "**/files.json": true,
+        "**/*.gen.ts": true
+    }
+}
