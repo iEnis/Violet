@@ -9,7 +9,7 @@
 
     "files.readonlyInclude": {
         "**/files.json": true,
-        "**/*.gen.ts": true
+        "**/*.gen.ts": false
     },
     "files.watcherExclude": {
         "**/files.json": true,

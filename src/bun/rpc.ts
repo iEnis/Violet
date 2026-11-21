@@ -1,5 +1,6 @@
 import { readdirSync, readFileSync, rmSync, writeFileSync } from "fs";
 import { BrowserView } from "electrobun/main";
+import { extensionRPC } from "./rpc.gen";
 import { isDev } from ".";
 import path from "path";
 
@@ -14,6 +15,7 @@ const rmFileSync = (id: string) => rmSync(path.join(extensionsJSFilesPath, id), 
 export const rpc = BrowserView.defineRPC<AppRPC>({
     handlers: {
         requests: {
+            ...extensionRPC.requests,
             getExtensions: async () => {
                 try {
                     console.log(extensionFilePath);
@@ -52,6 +54,9 @@ export const rpc = BrowserView.defineRPC<AppRPC>({
                     return false;
                 }
             },
+        },
+        messages: {
+            ...extensionRPC.messages,
         },
     },
 });

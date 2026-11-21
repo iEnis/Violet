@@ -6,3 +6,5 @@ dist/
 artifacts/
 *.tsbuildinfo
 .cottontail-tmp
+# /src/mainview/extensions/*/
+# /src/bun/extensions/*/

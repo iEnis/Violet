@@ -18,6 +18,6 @@
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true
     },
-    "include": ["src/mainview", "electrobun.config.ts", "src/shared"],
+    "include": ["src/mainview", "electrobun.config.ts", "src/shared", "src/bun/animeTracker/rpc.ts"],
     "exclude": ["node_modules", "dist", "build", "../../package/dist"],
 }
