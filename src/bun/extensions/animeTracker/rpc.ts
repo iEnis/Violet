@@ -6,7 +6,9 @@ export default {
             return { name: "", seasons: "" };
         },
     },
-    messages: {},
+    messages: {
+        animeTracker_test: "test",
+    },
 } satisfies RPCHandler<RPCType>;
 
 export type RPCType = ExtensionRPCType<
@@ -19,7 +21,7 @@ export type RPCType = ExtensionRPCType<
             };
         };
         messages: {
-            animeTracker_test: ""
+            animeTracker_test: string
         };
     }
 >;

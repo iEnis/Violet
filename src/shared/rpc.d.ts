@@ -20,7 +20,7 @@ type EnforcePrefix<P extends string, T, Entry> = {
 
 export type PrefixedRPCTypeDeclaration<P extends string, T extends ExtensionRPCTypeDeclaration> = {
     requests?: EnforcePrefix<P, NonNullable<T["requests"]>, RPCRequestsSchema[string]>;
-    messages?: EnforcePrefix<P, NonNullable<T["messages"]>, RPCMessagesSchema[string]>;
+    messages?: EnforcePrefix<P, NonNullable<T["messages"]>, unknown>;
 };
 
 export type ExtensionRPCType<P extends string, T extends ExtensionRPCTypeDeclaration & PrefixedRPCTypeDeclaration<P, T>> = T & {
@@ -33,7 +33,9 @@ export type RPCHandler<T extends ExtensionRPCTypeDeclaration & { readonly [rpcPr
             ? (params: Params) => Response | Promise<Response>
             : never;
     };
-    messages: {};
+    messages: {
+        [K in keyof NonNullable<T["messages"]>]: (payload: NonNullable<T["messages"]>[K]) => void;
+    };
 };
 
 export type AppRPC = DefineRPCSchema<{
