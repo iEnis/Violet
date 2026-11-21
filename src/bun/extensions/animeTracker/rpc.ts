@@ -9,12 +9,17 @@ export default {
     messages: {},
 } satisfies RPCHandler<RPCType>;
 
-export type RPCType = ExtensionRPCType<{
-    requests: {
-        animeTracker_fetchAnime: {
-            params: { id: string };
-            response: { name: string; seasons: string };
+export type RPCType = ExtensionRPCType<
+    "animeTracker",
+    {
+        requests: {
+            animeTracker_fetchAnime: {
+                params: { id: string };
+                response: { name: string; seasons: string };
+            };
         };
-    };
-    messages: {};
-}>;
+        messages: {
+            animeTracker_test: ""
+        };
+    }
+>;
