@@ -1,4 +1,4 @@
-import type { ExtensionManifest } from "../types";
+import type { ExtensionManifest } from "../../../shared/extensions";
 
 export default {
     id: "animeTracker",

@@ -2,23 +2,17 @@ import type { RPCRequestsSchema } from "../../.hutch/devkit/api/shared/rpc";
 import type { ElectrobunRPCSchema } from "electrobun/view";
 import type { ExtensionType } from "./extensions";
 
-type DefineRPCSchema<T extends ElectrobunRPCSchema> = T;
+import type { ExtensionRPC as BunExtensionRPC } from "../bun/rpc.gen";
+import type { ExtensionRPC as WebviewExtensionRPC } from "../mainview/lib/rpc.gen";
 
-export type PrefixRPC<T, Prefix extends string> = {
-    requests: {
-        [K in keyof NonNullable<T["requests"]> as `${Prefix}_${string & K}`]: NonNullable<T["requests"]>[K];
-    };
-    messages: {
-        [K in keyof NonNullable<T["messages"]> as `${Prefix}_${string & K}`]: NonNullable<T["messages"]>[K];
-    };
-};
+type DefineRPCSchema<T extends ElectrobunRPCSchema> = T;
 
 export type ExtensionRPCTypeDeclaration = {
     requests?: RPCRequestsSchema;
     messages?: RPCMessagesSchema;
 };
 
-export type ExtensionRPCType<T extends ExtensionRPCTypeDeclaration, Prefix extends string> = PrefixRPC<T, Prefix>;
+export type ExtensionRPCType<T extends ExtensionRPCTypeDeclaration> = T;
 
 export type RPCHandler<T extends ExtensionRPCTypeDeclaration> = {
     requests: {
@@ -31,25 +25,27 @@ export type RPCHandler<T extends ExtensionRPCTypeDeclaration> = {
 
 export type AppRPC = DefineRPCSchema<{
     bun: {
-        requests: {
-            getExtensions: {
-                params: undefined;
-                response: ExtensionType[];
-            };
-            installExtension: {
-                params: { id: string };
-                response: boolean;
-            };
-            uninstallExtension: {
-                params: { id: string };
-                response: boolean;
-            };
-        };
-        messages: {};
+        requests: NonNullable<
+            BunExtensionRPC["requests"] & {
+                native_getExtensions: {
+                    params: undefined;
+                    response: ExtensionType[];
+                };
+                native_installExtension: {
+                    params: { id: string };
+                    response: boolean;
+                };
+                native_uninstallExtension: {
+                    params: { id: string };
+                    response: boolean;
+                };
+            }
+        >;
+        messages: NonNullable<BunExtensionRPC["messages"] & {}>;
     };
 
     webview: {
-        requests: {};
-        messages: {};
+        requests: NonNullable<WebviewExtensionRPC["requests"] & {}>;
+        messages: NonNullable<WebviewExtensionRPC["messages"] & {}>;
     };
 }>;

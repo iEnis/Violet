@@ -16,7 +16,7 @@ export const rpc = BrowserView.defineRPC<AppRPC>({
     handlers: {
         requests: {
             ...extensionRPC.requests,
-            getExtensions: async () => {
+            native_getExtensions: async () => {
                 try {
                     console.log(extensionFilePath);
                     if (!isDev) return safeGetExtensions();
@@ -34,7 +34,7 @@ export const rpc = BrowserView.defineRPC<AppRPC>({
                     return [] as ExtensionType[];
                 }
             },
-            installExtension: async ({ id }) => {
+            native_installExtension: async ({ id }) => {
                 if (isDev) return true;
                 try {
                     const extensions = safeGetExtensions();
@@ -44,7 +44,7 @@ export const rpc = BrowserView.defineRPC<AppRPC>({
                     return false;
                 }
             },
-            uninstallExtension: async ({ id }) => {
+            native_uninstallExtension: async ({ id }) => {
                 if (isDev) return true;
                 try {
                     writeFileSync(extensionFilePath, JSON.stringify(safeGetExtensions().filter((x) => x.id !== id)));

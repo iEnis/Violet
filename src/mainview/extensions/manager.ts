@@ -6,13 +6,13 @@ const installed = new Map<string, Extension>();
 const loaded = new Map<string, ExtensionModule>();
 
 export async function loadAllExtensions() {
-    const installedIds = (await rpc.request.getExtensions()).map((x) => x.id);
+    const installedIds = (await rpc.request.native_getExtensions()).map((x) => x.id);
 
     await Promise.all(installedIds.map((id) => installExtension(id)));
 }
 
 export async function installExtension(id: string, install = false) {
-    if (install) await rpc.request.installExtension({ id });
+    if (install) await rpc.request.native_installExtension({ id });
 
     const path = `./${id}/index.tsx`;
     const loader = registry[path];
@@ -34,7 +34,7 @@ export async function installExtension(id: string, install = false) {
 export async function uninstallExtension(id: string) {
     installed.delete(id);
     loaded.delete(id);
-    await rpc.request.uninstallExtension({ id });
+    await rpc.request.native_uninstallExtension({ id });
 }
 
 export async function loadExtension(id: string) {
