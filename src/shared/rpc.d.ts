@@ -15,7 +15,7 @@ export type ExtensionRPCTypeDeclaration = {
 declare const rpcPrefix: unique symbol;
 
 type EnforcePrefix<P extends string, T, Entry> = {
-    [K in keyof T]: K extends `${P}_${string}` ? Entry : never;
+    [K in keyof T]: K extends `${P}_${string}` ? Entry : never; // `RPC "${K & string}" must be prefixed with "${P}_"`
 };
 
 export type PrefixedRPCTypeDeclaration<P extends string, T extends ExtensionRPCTypeDeclaration> = {
@@ -34,7 +34,7 @@ export type RPCHandler<T extends ExtensionRPCTypeDeclaration & { readonly [rpcPr
             : never;
     };
     messages: {
-        [K in keyof NonNullable<T["messages"]>]: (payload: NonNullable<T["messages"]>[K]) => void;
+        [K in keyof NonNullable<T["messages"]>]: NonNullable<T["messages"]>[K];
     };
 };
 

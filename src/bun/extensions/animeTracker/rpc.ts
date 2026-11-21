@@ -21,7 +21,7 @@ export type RPCType = ExtensionRPCType<
             };
         };
         messages: {
-            animeTracker_test: string
+            animeTracker_test: string;
         };
     }
 >;
